@@ -1,0 +1,3 @@
+﻿id,person_id,name,role,assigned_days,shift_start,camera,time,face_image,score,registered_photo,ai_commentary,ai_risk_score,createdAt,updatedAt
+1,emp1,Kurt,Cleaner,"[""Tue""]",17:00,Web Registration,2026/06/09 11:57:19,,1,1,Initial system enrolment,0,2026-06-09T03:57:21.973Z,2026-06-09T10:59:44.533Z
+2,emp2,juswa,Cleaner,"[""Wed""]",17:00,Web Registration,2026/06/09 12:17:56,,1,1,Initial system enrolment,0,2026-06-09T04:17:59.053Z,2026-06-09T10:59:44.550Z

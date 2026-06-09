@@ -1,0 +1,1810 @@
+{
+  "name": "1Rotary",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "1rotary-aira-face",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        -48
+      ],
+      "id": "7c2e9637-5252-40fc-a848-92e28a658558",
+      "name": "1Rotary AiraFace IN",
+      "webhookId": "47b80629-18c7-4f84-9737-dace93feddb0"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        272,
+        -128
+      ],
+      "id": "368c427f-c75d-4a8b-a01a-c32ee60d5956",
+      "name": "Respond to AiraFace IN"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "body.name",
+              "value": "={{ $('Extract Role').item.json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "body.id",
+              "value": "={{ $('Extract Role').item.json.body.person_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "body.time",
+              "value": "={{ $('Extract Role').item.json.body.time }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "body.camera",
+              "value": "={{ $('Extract Role').item.json.body.camera }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "body.role",
+              "value": "={{ $('Extract Role').item.json.body.role[2] }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "body.face_image",
+              "value": "={{ $('Extract Role').item.json.body.face_image }}",
+              "type": "string"
+            },
+            {
+              "id": "f85583fe-c7e0-45e9-b609-e0c0aa4aa141",
+              "name": "body.role2",
+              "value": "={{ $('Extract Role').item.json.extractedRole }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1200,
+        -240
+      ],
+      "id": "5961b3ac-d764-4563-9778-733d7bb14aa8",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/WpI7Vs1G2h8ovOFG"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "person_id": "={{ $json.body.id }}",
+            "name": "={{ $json.body.name }}",
+            "role": "={{ $json.body.role2 }}",
+            "time": "={{ $json.body.time }}",
+            "camera": "={{ $json.body.camera }}",
+            "face_image": "={{ $json.body.face_image }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "person_id",
+              "displayName": "person_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "camera",
+              "displayName": "camera",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "face_image",
+              "displayName": "face_image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "registered_photo",
+              "displayName": "registered_photo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_commentary",
+              "displayName": "ai_commentary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_risk_score",
+              "displayName": "ai_risk_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1360,
+        -240
+      ],
+      "id": "5eb72483-e13d-4e28-8486-70272e2b294e",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "path": "1rotary-attendance",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        192
+      ],
+      "id": "b81db1ee-4959-4f3b-95a0-8d18195382e3",
+      "name": "1Rotary Attendance OUT",
+      "webhookId": "f8b48cc3-7e9e-4f97-af91-9208bbe50929"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        560,
+        192
+      ],
+      "id": "add836f6-eeba-4eff-a796-7b54b7b6865d",
+      "name": "Respond to Attendance OUT"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/WpI7Vs1G2h8ovOFG"
+        },
+        "returnAll": true,
+        "orderBy": true,
+        "orderByDirection": "ASC"
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        368,
+        192
+      ],
+      "id": "4512e944-a398-446e-8cb1-12d18918d359",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "jsCode": "let webhookItems = [];\n\n// Safely check which trigger node executed to grab the original payload\nif ($('1Rotary AiraFace IN').isExecuted) {\n  webhookItems = $('1Rotary AiraFace IN').all();\n} else if ($('Face Detection').isExecuted) {\n  webhookItems = $('Face Detection').all();\n}\n\n// If neither trigger has data, safely pass the input through to avoid crashing\nif (!webhookItems || webhookItems.length === 0) {\n  return $input.all();\n}\n\nconst dbItems = $input.all();\nconst outputItems = [];\n\nfor (let i = 0; i < webhookItems.length; i++) {\n  // Create a deep COPY of the item to bypass n8n's read-only restriction\n  const newItem = JSON.parse(JSON.stringify(webhookItems[i]));\n  \n  const body = newItem.json.body;\n  if (!body) {\n    outputItems.push(newItem);\n    continue;\n  }\n\n  // Extract Role (Handles array or string depending on payload)\n  newItem.json.extractedRole = Array.isArray(body.role) \n    ? body.role.find(r => r === 'Day Employee') || null \n    : (typeof body.role === 'string' ? body.role : null);\n\n  // Convert Time and Calculate Status\n  if (body.time) {\n    // Safely parse the time string\n    const timeStr = body.time.includes('/') ? body.time.replace(/\\//g, '-') : body.time;\n    const isoString = timeStr.replace(' ', 'T') + '+08:00';\n    let checkInDate = new Date(isoString);\n    \n    // Fallback if parsing fails\n    if (isNaN(checkInDate.getTime())) checkInDate = new Date();\n    \n    newItem.json.epochTime = checkInDate.getTime();\n\n    // --- Dynamic Shift Start from Employee_Events ---\n    const dbRow = dbItems[i]?.json || {};\n    const shiftStartStr = dbRow.shift_start || \"08:00\"; \n    \n    const [shiftHours, shiftMinutes] = shiftStartStr.split(':').map(Number);\n\n    const shiftStart = new Date(newItem.json.epochTime);\n    shiftStart.setHours(shiftHours || 8, shiftMinutes || 0, 0, 0);\n\n    const gracePeriodEnd = new Date(shiftStart);\n    gracePeriodEnd.setMinutes(gracePeriodEnd.getMinutes() + 15);\n\n    // Evaluate Status and Assign Email Colors\n    if (newItem.json.epochTime < shiftStart.getTime()) {\n        newItem.json.arrivalStatus = \"Early\";\n        newItem.json.statusColorText = \"#0284c7\"; \n        newItem.json.statusColorBg = \"#e0f2fe\";   \n    } else if (newItem.json.epochTime <= gracePeriodEnd.getTime()) {\n        newItem.json.arrivalStatus = \"On Time\";\n        newItem.json.statusColorText = \"#10b981\"; \n        newItem.json.statusColorBg = \"#ecfdf5\";   \n    } else {\n        newItem.json.arrivalStatus = \"Late\";\n        newItem.json.statusColorText = \"#ef4444\"; \n        newItem.json.statusColorBg = \"#fef2f2\";   \n    }\n  } else {\n    newItem.json.epochTime = null;\n    newItem.json.arrivalStatus = \"Unknown\";\n    newItem.json.statusColorText = \"#64748b\";\n    newItem.json.statusColorBg = \"#f1f5f9\";\n  }\n\n  // Push the successfully modified copy\n  outputItems.push(newItem);\n}\n\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        -48
+      ],
+      "id": "3936bda0-b295-4216-96a2-8b5f3831c300",
+      "name": "Extract Role"
+    },
+    {
+      "parameters": {
+        "sendTo": "agnlaudes@gmail.com",
+        "subject": "=[1Rotary] Attendance Alert: {{ $json.body.name }} is {{ $json.arrivalStatus }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <title>Attendance Alert: Employee {{ $json.arrivalStatus }}</title>\n    <style>\n        /* Reset & Base Setup */\n        html, body { margin: 0 auto !important; padding: 0 !important; height: 100% !important; width: 100% !important; background-color: #f4f5f7; }\n        * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }\n        table, td { mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; border-spacing: 0 !important; border-collapse: collapse !important; }\n        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }\n        a { text-decoration: none; }\n\n        /* Typography */\n        body, table, td, a, p, span { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; }\n        \n        /* Utility Classes */\n        .bg-light { background-color: #f4f5f7; }\n        .bg-white { background-color: #ffffff; }\n        .text-dark { color: #0f1115; }\n        .text-muted { color: #64748b; }\n        .text-accent { color: #38bdf8; }\n        .text-success { color: #10b981; }\n\n        /* Mobile Responsiveness */\n        @media screen and (max-width: 600px) {\n            .email-container { width: 100% !important; margin: auto !important; }\n            .stack-column { display: block !important; width: 100% !important; max-width: 100% !important; direction: ltr !important; }\n            .stack-column td { padding-bottom: 15px !important; }\n            .mobile-p-top { padding-top: 20px !important; }\n            .mobile-p-sides { padding-left: 20px !important; padding-right: 20px !important; }\n        }\n    </style>\n</head>\n<body width=\"100%\" style=\"margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f4f5f7;\">\n    <center style=\"width: 100%; background-color: #f4f5f7;\">\n        \n        <!-- Preheader (Hidden text for email clients) -->\n        <div style=\"display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;\">\n            The biometric check-in detected: {{ $json.body.name }} is marked as {{ $json.arrivalStatus }}.\n        </div>\n\n        <table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"600\" style=\"margin: 0 auto;\" class=\"email-container\">\n            <!-- Spacing above email -->\n            <tr><td height=\"40\" style=\"font-size: 40px; line-height: 40px;\">&nbsp;</td></tr>\n\n            <tr>\n                <td class=\"bg-white\" style=\"border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;\">\n                    \n                    <!-- Header -->\n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"background-color: #0b0d13; padding: 25px 40px; border-top: 4px solid #38bdf8; text-align: center;\" class=\"mobile-p-sides\">\n                                <h1 style=\"margin: 0; color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;\">1Rotary Command Center</h1>\n                            </td>\n                        </tr>\n                    </table>\n\n                    <!-- Alert Title & Badge -->\n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 40px 40px 20px 40px;\" class=\"mobile-p-sides mobile-p-top\">\n                                <p style=\"margin: 0 0 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;\">Automated Alert</p>\n                                <h2 style=\"margin: 0; font-size: 24px; font-weight: 800; color: #0f1115;\">Biometric Check-In Detected</h2>\n                            </td>\n                        </tr>\n                    </table>\n\n                    <!-- Main Message -->\n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px;\" class=\"mobile-p-sides\">\n                                <p style=\"margin: 0; font-size: 15px; line-height: 24px; color: #475569;\">\n                                    The <strong>biometric</strong> module has successfully recognized an employee. They have been officially logged in the system as <span style=\"background-color: #ecfdf5; color: #10b981; font-weight: 700; padding: 3px 8px; border-radius: 4px; font-size: 13px;\">{{ $json.arrivalStatus }}</span>.\n                                </p>\n                            </td>\n                        </tr>\n                    </table>\n\n                    <!-- Data Grid (2 Columns) -->\n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px;\" class=\"mobile-p-sides\">\n                                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;\">\n                                    <tr>\n                                        <td style=\"padding: 24px;\">\n                                            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                                                <tr>\n                                                    <!-- Column 1 -->\n                                                    <td class=\"stack-column\" width=\"50%\" valign=\"top\" style=\"padding-right: 10px;\">\n                                                        <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                                                            <tr>\n                                                                <td style=\"padding-bottom: 16px;\">\n                                                                    <p style=\"margin: 0 0 4px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Employee Name</p>\n                                                                    <p style=\"margin: 0; font-size: 16px; font-weight: 700; color: #0f1115;\">{{ $json.body.name }}</p>\n                                                                </td>\n                                                            </tr>\n                                                            <tr>\n                                                                <td>\n                                                                    <p style=\"margin: 0 0 4px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Assigned Role</p>\n                                                                    <p style=\"margin: 0; font-size: 15px; font-weight: 500; color: #334155;\">{{ $json.body.role2 }}</p>\n                                                                </td>\n                                                            </tr>\n                                                        </table>\n                                                    </td>\n                                                    <!-- Column 2 -->\n                                                    <td class=\"stack-column\" width=\"50%\" valign=\"top\" style=\"padding-left: 10px;\">\n                                                        <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                                                            <tr>\n                                                                <td style=\"padding-bottom: 16px;\">\n                                                                    <p style=\"margin: 0 0 4px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Time Logged</p>\n                                                                    <p style=\"margin: 0; font-size: 15px; font-weight: 600; color: #0f1115; font-family: monospace;\">{{ $json.body.time }}</p>\n                                                                </td>\n                                                            </tr>\n                                                            <tr>\n                                                                <td>\n                                                                    <p style=\"margin: 0 0 4px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Capture Source</p>\n                                                                    <p style=\"margin: 0; font-size: 15px; font-weight: 500; color: #334155;\">{{ $json.body.camera }}</p>\n                                                                </td>\n                                                            </tr>\n                                                        </table>\n                                                    </td>\n                                                </tr>\n                                            </table>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                    </table>\n\n                    <!-- Captured Image Section -->\n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px; text-align: center;\" class=\"mobile-p-sides\">\n                                <p style=\"margin: 0 0 15px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;\">Verification Photo</p>\n                                \n                                <!-- Fallback background incase image fails -->\n                                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin: 0 auto;\">\n                                    <tr>\n                                        <td style=\"border-radius: 8px; padding: 4px; border: 1px solid #e2e8f0; background-color: #f8fafc; box-shadow: 0 2px 8px rgba(0,0,0,0.05);\">\n                                            <img src=\"data:image/jpeg;base64,{{ $json.body.face_image }}\" width=\"140\" alt=\"Biometric Capture\" style=\"width: 140px; max-width: 100%; border-radius: 6px; display: block; background-color: #e2e8f0;\" />\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                    </table>\n\n                    <!-- Call to Action -->\n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 10px 40px 40px 40px; text-align: center;\" class=\"mobile-p-sides\">\n                                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin: 0 auto;\">\n                                    <tr>\n                                        <td style=\"border-radius: 6px; background-color: #0b0d13; text-align: center;\">\n                                            <a href=\"https://your-1rotary-dashboard-url.com/opening-cleaning.html\" target=\"_blank\" style=\"background-color: #0b0d13; border: 1px solid #0b0d13; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 14px; color: #ffffff; text-decoration: none; padding: 14px 28px; display: block; border-radius: 6px; font-weight: 600;\">Open Command Center</a>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                    </table>\n\n                </td>\n            </tr>\n\n            <!-- Footer -->\n            <tr>\n                <td style=\"padding: 24px 40px; text-align: center;\">\n                    <p style=\"margin: 0 0 8px 0; font-size: 12px; color: #94a3b8; line-height: 18px;\">\n                        This is an automated operational alert from the <strong>1Rotary Region North</strong> system.<br>\n                        Please do not reply directly to this email.\n                    </p>\n                    <p style=\"margin: 0; font-size: 11px; color: #cbd5e1;\">\n                        Powered by 1Rotary Biometric Security Infrastructure\n                    </p>\n                </td>\n            </tr>\n            \n            <!-- Spacing below email -->\n            <tr><td height=\"40\" style=\"font-size: 40px; line-height: 40px;\">&nbsp;</td></tr>\n        </table>\n    </center>\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "bccList": "laudesagn@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1360,
+        -400
+      ],
+      "id": "5df1d945-c07f-4cbc-abc1-86181e717fc5",
+      "name": "Send a message",
+      "webhookId": "94eb0458-923f-47f5-ab49-bd2a46a4122d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "074XR1fg2gvsIJn2",
+          "name": "AGN Laudes Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "get-employees",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "name": "Webhook Get Employees",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        896
+      ],
+      "id": "34e14213-0f57-4c80-8fd0-208a891ba5dd",
+      "webhookId": "ccf74472-866c-4eee-b77c-aa392c3e68ba"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary"
+        },
+        "returnAll": true
+      },
+      "name": "Get 1Rotary",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        896
+      ],
+      "id": "fbeab770-eddc-4efe-96d5-fe9267257ec9",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "cCFk7mAoM0hH0eZR",
+          "mode": "list",
+          "cachedResultName": "Employee_Events",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/cCFk7mAoM0hH0eZR"
+        },
+        "returnAll": true
+      },
+      "name": "Get Employee_Events",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        896
+      ],
+      "id": "40873f74-0651-4915-b4fd-9171146539f0",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const rotaryData = $('Get 1Rotary').all();\nconst eventData = $('Get Employee_Events').all();\n\n// 1. Build a master dictionary including shift data\nconst employeeMap = new Map();\n\n// Process Employee_Events (Master Schedule)\nif (eventData && eventData.length > 0) {\n    for (const item of eventData) {\n        // Skip the empty fallback item if the database was empty\n        if (!item.json || Object.keys(item.json).length === 0) continue; \n\n        const pid = item.json.person_id;\n        if (!pid) continue;\n        \n        // Parse complex fields\n        let days = item.json.assigned_days;\n        if (typeof days === 'string') {\n            try { days = JSON.parse(days); } catch(e) { days = []; }\n        }\n\n        employeeMap.set(pid, {\n            id: pid,\n            person_id: pid, // Explicitly pass person_id for the frontend\n            name: item.json.name || \"Unknown\",\n            role: item.json.role || \"Cleaner\",\n            assigned_days: days || [], // Use snake_case to match frontend\n            shift_start: item.json.shift_start || \"08:00\", \n            status: \"Absent\",\n            lastCheckIn: null,\n            camera: null,\n            faceImage: null\n        });\n    }\n}\n\n// 2. Overlay live telemetry from 1Rotary\nif (rotaryData && rotaryData.length > 0) {\n    for (const item of rotaryData) {\n        // Skip the empty fallback item if the database was empty\n        if (!item.json || Object.keys(item.json).length === 0) continue;\n\n        const pid = item.json.person_id;\n        if (!pid) continue;\n\n        if (!employeeMap.has(pid)) {\n            employeeMap.set(pid, {\n                id: pid,\n                person_id: pid,\n                name: item.json.name || \"Unknown\",\n                role: item.json.role || \"Cleaner\",\n                assigned_days: [],\n                shift_start: \"08:00\", \n                status: \"Present\",\n                lastCheckIn: item.json.time,\n                camera: item.json.camera,\n                faceImage: item.json.face_image\n            });\n            continue;\n        }\n\n        const emp = employeeMap.get(pid);\n        emp.status = \"Present\";\n        emp.lastCheckIn = item.json.time;\n        if (item.json.face_image) emp.faceImage = item.json.face_image;\n        emp.camera = item.json.camera;\n    }\n}\n\nreturn Array.from(employeeMap.values()).map(emp => ({ json: emp }));"
+      },
+      "name": "Merge Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        896
+      ],
+      "id": "1332cf51-6008-4f5c-aa73-668661033a96"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respond GET",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1232,
+        896
+      ],
+      "id": "fb3f2ae5-5a7f-4bf3-8d1b-4f132152788e"
+    },
+    {
+      "parameters": {
+        "operation": "rowExists",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/WpI7Vs1G2h8ovOFG"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "person_id",
+              "keyValue": "={{ $if($(\"1Rotary AiraFace IN\").isExecuted, $(\"1Rotary AiraFace IN\").item.json.body.person_id, $json.body.person_id) }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        -48
+      ],
+      "id": "83f477d6-743c-4e52-aea1-6f74d929cec8",
+      "name": "If row exists",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2e7cd594-191d-427a-aa29-f4e5151976a4",
+              "leftValue": "={{ $json.body.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        912,
+        -48
+      ],
+      "id": "87f98689-7dc2-4068-87be-d0192be0ad44",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3.1-flash-lite",
+          "mode": "list",
+          "cachedResultName": "models/gemini-3.1-flash-lite"
+        },
+        "text": "=Can you explain the video in 1-2 setences if the person in the video is cleaning the store. also provide a score 0 is not cleaning to 100 if cleaning.\n\n\nOUTPUT SCHEMA:\n{\n  \"analysis\": \"Provide a detailed observation, of the scenario. Maximumof 3 sentences\",\n  \"score\": integer (0-100)\n}",
+        "inputType": "binary",
+        "options": {
+          "maxOutputTokens": 300
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        1424,
+        -32
+      ],
+      "id": "13d27de5-b5f1-4da2-b3a6-47de298eb0c0",
+      "name": "Analyze video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "8tmt2fCQaLD2pZLW",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Access the nested text field from the Gemini node\nconst rawText = items[0].json.content.parts[0].text;\n\n// Clean up markdown formatting (if any)\nconst cleanedJson = rawText.replace(/```json|```/g, '').trim();\n\ntry {\n  const parsed = JSON.parse(cleanedJson);\n  \n  return [{\n    json: {\n      ai_commentary: parsed.analysis,\n      ai_risk_score: parsed.score,\n      scenario_type: parsed.scenario_type\n    }\n  }];\n} catch (e) {\n  return [{\n    json: {\n      ai_commentary: \"Parsing Error\",\n      ai_risk_score: 0,\n      raw_output: rawText\n    }\n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1632,
+        -32
+      ],
+      "id": "6f994c18-07bb-42ba-a27c-2b44667fcd7b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/WpI7Vs1G2h8ovOFG"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "person_id",
+              "keyValue": "={{ $('Extract Role').item.json.body.person_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ai_commentary": "={{ $json.ai_commentary }}",
+            "ai_risk_score": "={{ $json.ai_risk_score }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "person_id",
+              "displayName": "person_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "camera",
+              "displayName": "camera",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "face_image",
+              "displayName": "face_image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "registered_photo",
+              "displayName": "registered_photo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_commentary",
+              "displayName": "ai_commentary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_risk_score",
+              "displayName": "ai_risk_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1840,
+        -32
+      ],
+      "id": "87e0f745-d486-461b-bd95-aeab4f7b8dba",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "url": "https://a2ae298c-f16a-4f88-9721-7a4a92623402.relay.vmsproxy.com/media/81ecd84a-c7bb-265b-ab82-ce6c0be5ac84.mp4",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "pos",
+              "value": "={{ $('Extract Role').first().json.epochTime - 30000 }}"
+            },
+            {
+              "name": "duration",
+              "value": "600"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "df9bea04-d633-4fde-8b73-de114cef0f29",
+      "name": "Download Low-Res Clip from Nx3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1200,
+        -32
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "pSP0kF4G9KcNSUAf",
+          "name": "Unnamed credential 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "=POST",
+        "path": "1rotary-attendance",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        -240
+      ],
+      "id": "3960d551-ec95-49ae-9bff-0fe99b4c7af2",
+      "name": "Face Detection",
+      "webhookId": "d6c5b34c-1971-467d-a821-7d5183d290f8"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "register-personnel",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        432
+      ],
+      "id": "22d62ffa-637e-4f34-afe4-ebeae73d99af",
+      "name": "Registration (Upload Photos)",
+      "webhookId": "e729afe3-72d9-4345-8cbb-b6f9e68ad4f1"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "dataTableId": {
+          "__rl": true,
+          "value": "cCFk7mAoM0hH0eZR",
+          "mode": "list",
+          "cachedResultName": "Employee_Events",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/cCFk7mAoM0hH0eZR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "person_id",
+              "keyValue": "={{ $json.body.person_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.body.name }}",
+            "person_id": "={{ $json.body.person_id }}",
+            "role": "={{ $json.body.role }}",
+            "score": "={{ $json.body.score }}",
+            "registered_photo": "={{ $json.body.registered_photo }}",
+            "ai_commentary": "={{ $json.body.ai_commentary }}",
+            "ai_risk_score": "={{ $json.body.ai_risk_score }}",
+            "time": "={{ $json.body.time }}",
+            "camera": "={{ $json.body.camera }}",
+            "face_image": "={{ $json.body.face_image }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "person_id",
+              "displayName": "person_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "assigned_days",
+              "displayName": "assigned_days",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "camera",
+              "displayName": "camera",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "face_image",
+              "displayName": "face_image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "score",
+              "displayName": "score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "registered_photo",
+              "displayName": "registered_photo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_commentary",
+              "displayName": "ai_commentary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_risk_score",
+              "displayName": "ai_risk_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        368,
+        432
+      ],
+      "id": "3cd030b6-aaf5-4c1b-a10f-9094eaf89bf7",
+      "name": "Upsert row(s)"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "45 7 * * 1-6"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -976,
+        672
+      ],
+      "id": "34f4bb1a-0cba-45ca-ac04-a77276068689",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "cCFk7mAoM0hH0eZR",
+          "mode": "list",
+          "cachedResultName": "Employee_Events",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/cCFk7mAoM0hH0eZR"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -768,
+        672
+      ],
+      "id": "519157a8-add6-4f00-a948-c48c9fad8b50",
+      "name": "Get Employee_Events2",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/WpI7Vs1G2h8ovOFG"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -560,
+        672
+      ],
+      "id": "90fdd46f-9fd9-4222-a3a1-539340db94d5",
+      "name": "Get 1Rotary2",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "sendTo": "agnlaudes@gmail.com",
+        "subject": "={{ $json.emailSubject }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <title>{{ $json.emailSubject }}</title>\n    <style>\n        /* Reset & Base Setup */\n        html, body { margin: 0 auto !important; padding: 0 !important; height: 100% !important; width: 100% !important; background-color: #f4f5f7; }\n        * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }\n        table, td { mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; border-spacing: 0 !important; border-collapse: collapse !important; }\n        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }\n        a { text-decoration: none; }\n\n        /* Typography */\n        body, table, td, a, p, span { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; }\n        \n        /* Utility Classes */\n        .bg-light { background-color: #f4f5f7; }\n        .bg-white { background-color: #ffffff; }\n        .text-dark { color: #0f1115; }\n        .text-muted { color: #64748b; }\n        .text-accent { color: #38bdf8; }\n        .text-success { color: #10b981; }\n\n        /* Mobile Responsiveness */\n        @media screen and (max-width: 600px) {\n            .email-container { width: 100% !important; margin: auto !important; }\n            .stack-column { display: block !important; width: 100% !important; max-width: 100% !important; direction: ltr !important; }\n            .stack-column td { padding-bottom: 15px !important; }\n            .mobile-p-top { padding-top: 20px !important; }\n            .mobile-p-sides { padding-left: 20px !important; padding-right: 20px !important; }\n        }\n    </style>\n</head>\n<body width=\"100%\" style=\"margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f4f5f7;\">\n    <center style=\"width: 100%; background-color: #f4f5f7;\">\n        \n        \n        <div style=\"display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;\">\n            {{ $json.preheader }}\n        </div>\n\n        <table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"600\" style=\"margin: 0 auto;\" class=\"email-container\">\n            \n            <tr><td height=\"40\" style=\"font-size: 40px; line-height: 40px;\">&nbsp;</td></tr>\n\n            <tr>\n                <td class=\"bg-white\" style=\"border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;\">\n                    \n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"background-color: #0b0d13; padding: 25px 40px; border-top: 4px solid #38bdf8; text-align: center;\" class=\"mobile-p-sides\">\n                                <h1 style=\"margin: 0; color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;\">1Rotary Command Center</h1>\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 40px 40px 20px 40px;\" class=\"mobile-p-sides mobile-p-top\">\n                                <p style=\"margin: 0 0 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;\">Automated Report</p>\n                                <h2 style=\"margin: 0; font-size: 24px; font-weight: 800; color: #0f1115;\">{{ $json.alertTitle }}</h2>\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px;\" class=\"mobile-p-sides\">\n                                <p style=\"margin: 0; font-size: 15px; line-height: 24px; color: #475569;\">\n                                    {{ $json.mainMessage }}\n                                    <span style=\"background-color: {{ $json.badgeBg }}; color: {{ $json.badgeColor }}; font-weight: 700; padding: 3px 8px; border-radius: 4px; font-size: 13px;\">{{ $json.badgeText }}</span>\n                                </p>\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px;\" class=\"mobile-p-sides\">\n                                {{ $json.detailsHtml }}\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 10px 40px 40px 40px; text-align: center;\" class=\"mobile-p-sides\">\n                                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin: 0 auto;\">\n                                    <tr>\n                                        <td style=\"border-radius: 6px; background-color: #0b0d13; text-align: center;\">\n                                            <a href=\"https://your-1rotary-dashboard-url.com/opening-cleaning.html\" target=\"_blank\" style=\"background-color: #0b0d13; border: 1px solid #0b0d13; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 14px; color: #ffffff; text-decoration: none; padding: 14px 28px; display: block; border-radius: 6px; font-weight: 600;\">Open Command Center</a>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                    </table>\n\n                </td>\n            </tr>\n\n            \n            <tr>\n                <td style=\"padding: 24px 40px; text-align: center;\">\n                    <p style=\"margin: 0 0 8px 0; font-size: 12px; color: #94a3b8; line-height: 18px;\">\n                        This is an automated operational report from the <strong>1Rotary Region North</strong> system.<br>\n                        Please do not reply directly to this email.\n                    </p>\n                    <p style=\"margin: 0; font-size: 11px; color: #cbd5e1;\">\n                        Powered by 1Rotary Biometric Security Infrastructure\n                    </p>\n                </td>\n            </tr>\n            \n            \n            <tr><td height=\"40\" style=\"font-size: 40px; line-height: 40px;\">&nbsp;</td></tr>\n        </table>\n    </center>\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "bccList": "laudesagn@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -144,
+        672
+      ],
+      "id": "3f3a3b4d-baca-4296-a7af-2a064ab50a3b",
+      "name": "Send Admin Gmail",
+      "webhookId": "8ddd80ac-6f88-4099-b275-4245e8daf711",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "074XR1fg2gvsIJn2",
+          "name": "AGN Laudes Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const scheduledData = $items(\"Get Employee_Events2\"); \nconst detectedData = $items(\"Get 1Rotary2\");\n\nconst todayObj = new Date();\nconst days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];\nconst currentDayName = days[todayObj.getDay()];\n\nconst todayStringObj = new Date(todayObj.getTime() - (todayObj.getTimezoneOffset() * 60000)).toISOString().split('T')[0];\nconst todayStringSlash = todayStringObj.replace(/-/g, '/');\n\nlet expectedStaff = [];\nfor (let emp of scheduledData) {\n    let assigned = emp.json.assigned_days || [];\n    if (typeof assigned === 'string') {\n        try { assigned = JSON.parse(assigned); } catch(e) { assigned = []; }\n    }\n    if (assigned.includes(currentDayName)) {\n        expectedStaff.push(emp.json);\n    }\n}\n\nlet presentIds = new Set();\nfor (let log of detectedData) {\n    if (log.json.time && (log.json.time.includes(todayStringObj) || log.json.time.includes(todayStringSlash))) {\n        presentIds.add(log.json.person_id);\n    }\n}\n\nconst missingStaff = expectedStaff.filter(staff => !presentIds.has(staff.person_id));\nconst missingCount = missingStaff.length;\n\n// --- EMAIL TEMPLATE LOGIC ---\nlet emailSubject, preheader, alertTitle, badgeText, badgeBg, badgeColor, mainMessage, detailsHtml;\n\nif (missingCount > 0) {\n    emailSubject = `[1Rotary] Action Required: Pending Arrivals (${missingCount} Missing)`;\n    preheader = `Urgent: ${missingCount} scheduled employees have not checked in.`;\n    alertTitle = `Pending Arrivals Detected`;\n    badgeText = `ACTION REQUIRED`;\n    badgeBg = `#fef2f2`;\n    badgeColor = `#ef4444`;\n    mainMessage = `There are currently <strong>${missingCount}</strong> employees scheduled for today who have not yet checked in via the biometric scanner.`;\n    \n    detailsHtml = `<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;\"><tr><td style=\"padding: 24px;\">`;\n    \n    missingStaff.forEach((emp, index) => {\n        const borderBottom = index < missingStaff.length - 1 ? 'border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 16px;' : '';\n        detailsHtml += `\n        <div style=\"${borderBottom}\">\n            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                <tr>\n                    <td width=\"50%\" valign=\"top\" style=\"padding-right: 10px;\">\n                        <p style=\"margin: 0 0 4px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Employee Name</p>\n                        <p style=\"margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #0f1115;\">${emp.name}</p>\n                    </td>\n                    <td width=\"50%\" valign=\"top\" style=\"padding-left: 10px;\">\n                        <p style=\"margin: 0 0 4px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Assigned Role</p>\n                        <p style=\"margin: 0; font-size: 15px; font-weight: 500; color: #334155;\">${emp.role}</p>\n                    </td>\n                </tr>\n            </table>\n        </div>`;\n    });\n    detailsHtml += `</td></tr></table>`;\n\n} else {\n    emailSubject = `[1Rotary] All Clear: All Staff Present`;\n    preheader = `All ${expectedStaff.length} scheduled employees have checked in successfully.`;\n    alertTitle = `Morning Attendance Clear`;\n    badgeText = `ALL CLEAR`;\n    badgeBg = `#ecfdf5`;\n    badgeColor = `#10b981`;\n    mainMessage = `Excellent news. All <strong>${expectedStaff.length}</strong> scheduled employees have successfully checked in via the biometric module.`;\n    \n    detailsHtml = `<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;\">\n        <tr>\n            <td style=\"padding: 24px; text-align: center;\">\n                <p style=\"margin: 0; font-size: 15px; font-weight: 600; color: #10b981;\">No pending arrivals.</p>\n            </td>\n        </tr>\n    </table>`;\n}\n\nreturn [{\n    json: {\n        emailSubject,\n        preheader,\n        alertTitle,\n        badgeText,\n        badgeBg,\n        badgeColor,\n        mainMessage,\n        detailsHtml\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        672
+      ],
+      "id": "7f3bd549-0e6b-46a5-a503-752e00a74d29",
+      "name": "Format Admin Report"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "save-schedule",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "name": "Webhook Save Schedule",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        144,
+        672
+      ],
+      "id": "fb82d83f-3f84-4b7a-9bba-a45758eae12b",
+      "webhookId": "c62ec538-3863-4660-9fd1-92a63cb58867"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body.schedules",
+        "options": {}
+      },
+      "name": "Split Schedules",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        368,
+        672
+      ],
+      "id": "f3eb748b-cb6c-4fed-bc84-5b318a0b4d24"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "dataTableId": {
+          "__rl": true,
+          "value": "cCFk7mAoM0hH0eZR",
+          "mode": "list",
+          "cachedResultName": "Employee_Events"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "person_id",
+              "keyValue": "={{ $json.person_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "person_id": "={{ $json.person_id }}",
+            "name": "={{ $json.name }}",
+            "role": "={{ $json.role }}",
+            "assigned_days": "={{ JSON.stringify($json.assigned_days) }}",
+            "shift_start": "={{ $json.shift_start }}"
+          },
+          "matchingColumns": [
+            "person_id"
+          ],
+          "schema": [
+            {
+              "id": "person_id",
+              "displayName": "person_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "assigned_days",
+              "displayName": "assigned_days",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "shift_start",
+              "displayName": "shift_start",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "name": "Upsert Employee_Events",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        592,
+        672
+      ],
+      "id": "93f167b7-a69d-4843-b6b8-32d2fd8a4c24"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respond POST",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        816,
+        672
+      ],
+      "id": "13d1e8a7-5f79-4f22-b36a-2d90cf4b76bd"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1328,
+        912
+      ],
+      "id": "c1a12b55-3b99-4302-a384-b797102c469e",
+      "name": "Schedule Trigger1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "cCFk7mAoM0hH0eZR",
+          "mode": "list",
+          "cachedResultName": "Employee_Events",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/cCFk7mAoM0hH0eZR"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -736,
+        912
+      ],
+      "id": "da46233a-ffa9-4e6f-9457-8e85b4652107",
+      "name": "Get Employee_Events3",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "WpI7Vs1G2h8ovOFG",
+          "mode": "list",
+          "cachedResultName": "1Rotary",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/WpI7Vs1G2h8ovOFG"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -736,
+        1056
+      ],
+      "id": "ea6b7687-d70e-471e-84c6-2b6d57f69702",
+      "name": "Get 1Rotary3",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "sendTo": "agnlaudes@gmail.com",
+        "subject": "={{ $json.emailSubject }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <title>{{ $json.emailSubject }}</title>\n    <style>\n        /* Reset & Base Setup */\n        html, body { margin: 0 auto !important; padding: 0 !important; height: 100% !important; width: 100% !important; background-color: #f4f5f7; }\n        * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }\n        table, td { mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; border-spacing: 0 !important; border-collapse: collapse !important; }\n        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }\n        a { text-decoration: none; }\n\n        /* Typography */\n        body, table, td, a, p, span { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; }\n        \n        /* Utility Classes */\n        .bg-light { background-color: #f4f5f7; }\n        .bg-white { background-color: #ffffff; }\n        .text-dark { color: #0f1115; }\n        .text-muted { color: #64748b; }\n        .text-accent { color: #38bdf8; }\n        .text-success { color: #10b981; }\n\n        /* Mobile Responsiveness */\n        @media screen and (max-width: 600px) {\n            .email-container { width: 100% !important; margin: auto !important; }\n            .stack-column { display: block !important; width: 100% !important; max-width: 100% !important; direction: ltr !important; }\n            .stack-column td { padding-bottom: 15px !important; }\n            .mobile-p-top { padding-top: 20px !important; }\n            .mobile-p-sides { padding-left: 20px !important; padding-right: 20px !important; }\n        }\n    </style>\n</head>\n<body width=\"100%\" style=\"margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f4f5f7;\">\n    <center style=\"width: 100%; background-color: #f4f5f7;\">\n        \n        \n        <div style=\"display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;\">\n            {{ $json.preheader }}\n        </div>\n\n        <table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"600\" style=\"margin: 0 auto;\" class=\"email-container\">\n            \n            <tr><td height=\"40\" style=\"font-size: 40px; line-height: 40px;\">&nbsp;</td></tr>\n\n            <tr>\n                <td class=\"bg-white\" style=\"border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;\">\n                    \n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"background-color: #0b0d13; padding: 25px 40px; border-top: 4px solid #38bdf8; text-align: center;\" class=\"mobile-p-sides\">\n                                <h1 style=\"margin: 0; color: #ffffff; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;\">1Rotary Command Center</h1>\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 40px 40px 20px 40px;\" class=\"mobile-p-sides mobile-p-top\">\n                                <p style=\"margin: 0 0 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;\">Automated Report</p>\n                                <h2 style=\"margin: 0; font-size: 24px; font-weight: 800; color: #0f1115;\">{{ $json.alertTitle }}</h2>\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px;\" class=\"mobile-p-sides\">\n                                <p style=\"margin: 0; font-size: 15px; line-height: 24px; color: #475569;\">\n                                    {{ $json.mainMessage }}\n                                    <span style=\"background-color: {{ $json.badgeBg }}; color: {{ $json.badgeColor }}; font-weight: 700; padding: 3px 8px; border-radius: 4px; font-size: 13px;\">{{ $json.badgeText }}</span>\n                                </p>\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 0 40px 30px 40px;\" class=\"mobile-p-sides\">\n                                {{ $json.detailsHtml }}\n                            </td>\n                        </tr>\n                    </table>\n\n                    \n                    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                        <tr>\n                            <td style=\"padding: 10px 40px 40px 40px; text-align: center;\" class=\"mobile-p-sides\">\n                                <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" style=\"margin: 0 auto;\">\n                                    <tr>\n                                        <td style=\"border-radius: 6px; background-color: #0b0d13; text-align: center;\">\n                                            <a href=\"https://your-1rotary-dashboard-url.com/opening-cleaning.html\" target=\"_blank\" style=\"background-color: #0b0d13; border: 1px solid #0b0d13; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 14px; color: #ffffff; text-decoration: none; padding: 14px 28px; display: block; border-radius: 6px; font-weight: 600;\">Open Command Center</a>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </td>\n                        </tr>\n                    </table>\n\n                </td>\n            </tr>\n\n            \n            <tr>\n                <td style=\"padding: 24px 40px; text-align: center;\">\n                    <p style=\"margin: 0 0 8px 0; font-size: 12px; color: #94a3b8; line-height: 18px;\">\n                        This is an automated operational report from the <strong>1Rotary Region North</strong> system.<br>\n                        Please do not reply directly to this email.\n                    </p>\n                    <p style=\"margin: 0; font-size: 11px; color: #cbd5e1;\">\n                        Powered by 1Rotary Biometric Security Infrastructure\n                    </p>\n                </td>\n            </tr>\n            \n            \n            <tr><td height=\"40\" style=\"font-size: 40px; line-height: 40px;\">&nbsp;</td></tr>\n        </table>\n    </center>\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "bccList": "laudesagn@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -144,
+        976
+      ],
+      "id": "be693094-a5cb-4bfd-93cc-0fc43b77c955",
+      "name": "Send Admin Gmail1",
+      "webhookId": "8ddd80ac-6f88-4099-b275-4245e8daf711",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "074XR1fg2gvsIJn2",
+          "name": "AGN Laudes Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Safely get data from both tables\nlet scheduledData = [];\nif ($('Get Employee_Events3').isExecuted) {\n    const res = $('Get Employee_Events3').all();\n    if (Array.isArray(res) && res.length > 0 && res[0].json) scheduledData = res;\n}\n\nlet detectedData = [];\nif ($('Get 1Rotary3').isExecuted) {\n    const res = $('Get 1Rotary3').all();\n    if (Array.isArray(res) && res.length > 0 && res[0].json) detectedData = res;\n} else {\n    const res = $input.all();\n    if (Array.isArray(res) && res.length > 0 && res[0].json) detectedData = res;\n}\n\n// 2. Setup Time & Date matching\nconst phTime = new Date(new Date().toLocaleString(\"en-US\", {timeZone: \"Asia/Manila\"}));\nconst days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];\nconst currentDayName = days[phTime.getDay()];\nconst todayString = phTime.toISOString().split('T')[0].replace(/-/g, '/');\n\n// Format date for Email Subject (e.g., \"Tue, Jun 9, 2026\")\nconst dateOptions = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', timeZone: \"Asia/Manila\" };\nconst formattedDate = phTime.toLocaleDateString(\"en-US\", dateOptions);\n\nfunction formatTime(time24) {\n    if (!time24) return \"08:00 AM\";\n    const [h, m] = time24.split(':');\n    const hours = parseInt(h, 10);\n    const ampm = hours >= 12 ? 'PM' : 'AM';\n    const hours12 = hours % 12 || 12;\n    return `${hours12.toString().padStart(2, '0')}:${m} ${ampm}`;\n}\n\n// 3. Find who has clocked in today and grab their photo\nlet presentRecords = new Map();\ndetectedData.forEach(log => {\n    if (log.json.time && log.json.time.includes(todayString)) {\n        const pid = log.json.person_id || log.json.id;\n        if (pid) {\n            // Save both the time string AND the face_image\n            presentRecords.set(pid, {\n                time: log.json.time,\n                face_image: log.json.face_image || null\n            });\n        }\n    }\n});\n\n// 4. Evaluate Staff Status into 4 Categories\nlet absentStaff = [];\nlet lateStaff = [];\nlet onTimeStaff = [];\nlet earlyStaff = [];\n\nscheduledData.forEach(emp => {\n    const data = emp.json;\n    const pid = data.person_id || data.id;\n    let assigned = typeof data.assigned_days === 'string' ? JSON.parse(data.assigned_days) : (data.assigned_days || []);\n    \n    if (assigned.includes(currentDayName)) {\n        const shiftStartRaw = data.shift_start || \"08:00\";\n        const [sH, sM] = shiftStartRaw.split(':').map(Number);\n        const shiftTotalMins = (sH * 60) + sM;\n        \n        const staffObj = { name: data.name, role: data.role, shift_start: formatTime(shiftStartRaw) };\n\n        if (presentRecords.has(pid)) {\n            const record = presentRecords.get(pid);\n            const timeStr = record.time;\n            const logTime = timeStr.split(' ')[1]; // \"HH:MM:SS\"\n            const [aH, aM] = logTime.split(':').map(Number);\n            const actualMins = (aH * 60) + aM;\n\n            staffObj.checkInTime = formatTime(logTime.substring(0, 5));\n            \n            // Assign face image or a fallback initials avatar\n            staffObj.face_image = record.face_image || `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=e2e8f0&color=64748b`;\n\n            // Evaluate Early, On-Time, or Late (Includes 15 min grace period for On-Time)\n            if (actualMins < shiftTotalMins) {\n                earlyStaff.push(staffObj);\n            } else if (actualMins <= shiftTotalMins + 15) {\n                onTimeStaff.push(staffObj);\n            } else {\n                lateStaff.push(staffObj);\n            }\n        } else {\n            // No record found. Give them an absent initials avatar\n            staffObj.face_image = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=fef2f2&color=ef4444`;\n            absentStaff.push(staffObj);\n        }\n    }\n});\n\n// 5. Build Report Variables for HTML Template\nconst absentCount = absentStaff.length;\nconst lateCount = lateStaff.length;\nconst onTimeCount = onTimeStaff.length;\nconst earlyCount = earlyStaff.length;\nconst totalCount = absentCount + lateCount + onTimeCount + earlyCount;\n\n// EXACT Subject format requested + Dynamic Date\nlet emailSubject = `[1Rotary] Shift Report - ${formattedDate}: ${absentCount} Pending, ${lateCount} Late`;\nlet preheader, alertTitle, badgeText, badgeBg, badgeColor, mainMessage, detailsHtml;\n\nif (absentCount > 0 || lateCount > 0) {\n    preheader = `Shift Update: ${absentCount} absent, ${lateCount} late, ${onTimeCount} on-time, ${earlyCount} early.`;\n    alertTitle = `Shift Status Report`;\n    badgeText = absentCount > 0 ? `ACTION REQUIRED` : `ATTENTION`;\n    badgeBg = `#fef2f2`;\n    badgeColor = `#ef4444`;\n    mainMessage = `Current shift status: <strong>${absentCount}</strong> absent, <strong>${lateCount}</strong> late, <strong>${onTimeCount}</strong> on time, and <strong>${earlyCount}</strong> early.`;\n} else if (totalCount > 0) {\n    preheader = `All scheduled employees are present.`;\n    alertTitle = `Shift Status Report`;\n    badgeText = `ALL CLEAR`;\n    badgeBg = `#ecfdf5`;\n    badgeColor = `#10b981`;\n    mainMessage = `Excellent news. All scheduled employees are present (${earlyCount} early, ${onTimeCount} on time).`;\n} else {\n    return [{ json: { \n        emailSubject: `[1Rotary] Shift Report - ${formattedDate}: No Staff Scheduled`, \n        preheader: `There are no employees scheduled for today.`, \n        alertTitle: `Shift Status Report`, \n        badgeText: `NO SHIFTS`, badgeBg: `#f1f5f9`, badgeColor: `#64748b`, \n        mainMessage: `There are no personnel scheduled for operations today.`, \n        detailsHtml: `` \n    }}];\n}\n\n// 6. Build the dynamic HTML list sections\ndetailsHtml = ``;\n\n// Section A: Absent (Pending)\nif (absentCount > 0) {\n    detailsHtml += `<h3 style=\"color: #ef4444; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;\">Absent / Pending</h3>`;\n    detailsHtml += `<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #f8fafc; border: 1px solid #fca5a5; border-radius: 8px; margin-bottom: 24px;\"><tr><td style=\"padding: 16px;\">`;\n    \n    absentStaff.forEach((emp, index) => {\n        const borderBottom = index < absentCount - 1 ? 'border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 12px;' : '';\n        detailsHtml += `\n        <div style=\"${borderBottom}\">\n            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                <tr>\n                    <td width=\"48\" valign=\"middle\" style=\"padding-right: 12px;\">\n                        <img src=\"${emp.face_image}\" width=\"36\" height=\"36\" style=\"border-radius: 50%; display: block; border: 1px solid #fca5a5;\" alt=\"${emp.name}\" />\n                    </td>\n                    <td valign=\"middle\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Employee</p>\n                        <p style=\"margin: 0; font-size: 15px; font-weight: 700; color: #0f1115;\">${emp.name}</p>\n                    </td>\n                    <td valign=\"middle\" style=\"text-align: right;\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Assigned Shift</p>\n                        <p style=\"margin: 0; font-size: 14px; font-weight: 700; color: #ef4444;\">${emp.shift_start} <span style=\"font-size: 11px;\">(ABSENT)</span></p>\n                    </td>\n                </tr>\n            </table>\n        </div>`;\n    });\n    detailsHtml += `</td></tr></table>`;\n}\n\n// Section B: Late\nif (lateCount > 0) {\n    detailsHtml += `<h3 style=\"color: #f59e0b; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;\">Late</h3>`;\n    detailsHtml += `<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; margin-bottom: 24px;\"><tr><td style=\"padding: 16px;\">`;\n    \n    lateStaff.forEach((emp, index) => {\n        const borderBottom = index < lateCount - 1 ? 'border-bottom: 1px solid #fde68a; padding-bottom: 12px; margin-bottom: 12px;' : '';\n        detailsHtml += `\n        <div style=\"${borderBottom}\">\n            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                <tr>\n                    <td width=\"48\" valign=\"middle\" style=\"padding-right: 12px;\">\n                        <img src=\"${emp.face_image}\" width=\"36\" height=\"36\" style=\"border-radius: 50%; display: block; border: 1px solid #e2e8f0; object-fit: cover;\" alt=\"${emp.name}\" />\n                    </td>\n                    <td valign=\"middle\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Employee</p>\n                        <p style=\"margin: 0; font-size: 15px; font-weight: 700; color: #0f1115;\">${emp.name}</p>\n                    </td>\n                    <td valign=\"middle\" style=\"text-align: right;\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Time Logged</p>\n                        <p style=\"margin: 0; font-size: 14px; font-weight: 700; color: #f59e0b;\">${emp.checkInTime} <span style=\"font-size: 11px;\">(LATE)</span></p>\n                    </td>\n                </tr>\n            </table>\n        </div>`;\n    });\n    detailsHtml += `</td></tr></table>`;\n}\n\n// Section C: On-Time\nif (onTimeCount > 0) {\n    detailsHtml += `<h3 style=\"color: #10b981; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;\">On Time</h3>`;\n    detailsHtml += `<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #f8fafc; border: 1px solid #a7f3d0; border-radius: 8px; margin-bottom: 24px;\"><tr><td style=\"padding: 16px;\">`;\n    \n    onTimeStaff.forEach((emp, index) => {\n        const borderBottom = index < onTimeCount - 1 ? 'border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 12px;' : '';\n        detailsHtml += `\n        <div style=\"${borderBottom}\">\n            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                <tr>\n                    <td width=\"48\" valign=\"middle\" style=\"padding-right: 12px;\">\n                        <img src=\"${emp.face_image}\" width=\"36\" height=\"36\" style=\"border-radius: 50%; display: block; border: 1px solid #e2e8f0; object-fit: cover;\" alt=\"${emp.name}\" />\n                    </td>\n                    <td valign=\"middle\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Employee</p>\n                        <p style=\"margin: 0; font-size: 15px; font-weight: 700; color: #0f1115;\">${emp.name}</p>\n                    </td>\n                    <td valign=\"middle\" style=\"text-align: right;\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Time Logged</p>\n                        <p style=\"margin: 0; font-size: 14px; font-weight: 700; color: #10b981;\">${emp.checkInTime} <span style=\"font-size: 11px;\">(ON TIME)</span></p>\n                    </td>\n                </tr>\n            </table>\n        </div>`;\n    });\n    detailsHtml += `</td></tr></table>`;\n}\n\n// Section D: Early\nif (earlyCount > 0) {\n    detailsHtml += `<h3 style=\"color: #3b82f6; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;\">Early</h3>`;\n    detailsHtml += `<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"background-color: #eff6ff; border: 1px solid #93c5fd; border-radius: 8px; margin-bottom: 24px;\"><tr><td style=\"padding: 16px;\">`;\n    \n    earlyStaff.forEach((emp, index) => {\n        const borderBottom = index < earlyCount - 1 ? 'border-bottom: 1px solid #bfdbfe; padding-bottom: 12px; margin-bottom: 12px;' : '';\n        detailsHtml += `\n        <div style=\"${borderBottom}\">\n            <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n                <tr>\n                    <td width=\"48\" valign=\"middle\" style=\"padding-right: 12px;\">\n                        <img src=\"${emp.face_image}\" width=\"36\" height=\"36\" style=\"border-radius: 50%; display: block; border: 1px solid #e2e8f0; object-fit: cover;\" alt=\"${emp.name}\" />\n                    </td>\n                    <td valign=\"middle\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Employee</p>\n                        <p style=\"margin: 0; font-size: 15px; font-weight: 700; color: #0f1115;\">${emp.name}</p>\n                    </td>\n                    <td valign=\"middle\" style=\"text-align: right;\">\n                        <p style=\"margin: 0 0 2px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase;\">Time Logged</p>\n                        <p style=\"margin: 0; font-size: 14px; font-weight: 700; color: #3b82f6;\">${emp.checkInTime} <span style=\"font-size: 11px;\">(EARLY)</span></p>\n                    </td>\n                </tr>\n            </table>\n        </div>`;\n    });\n    detailsHtml += `</td></tr></table>`;\n}\n\nreturn [{\n    json: {\n        emailSubject,\n        preheader,\n        alertTitle,\n        badgeText,\n        badgeBg,\n        badgeColor,\n        mainMessage,\n        detailsHtml\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -336,
+        976
+      ],
+      "id": "d2582082-6232-464d-a47f-f7bc84f7e51b",
+      "name": "Format Admin Report1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "cCFk7mAoM0hH0eZR",
+          "mode": "list",
+          "cachedResultName": "Employee_Events",
+          "cachedResultUrl": "/projects/P8widGIIN4IY0Dtv/datatables/cCFk7mAoM0hH0eZR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "person_id",
+              "keyValue": "={{ $json.body.person_id }}"
+            }
+          ]
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        400,
+        -48
+      ],
+      "id": "0659318f-1931-4a4d-8dd0-caeb835847ce",
+      "name": "Get row(s)1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -992,
+        1056
+      ],
+      "id": "fd63550e-8810-4643-8d78-66ec04d2d9ee",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "// This script collects all items from the previous node \n// and returns them as a single item containing an array\nconst allItems = $input.all();\n\nreturn [{\n    json: {\n        employees: allItems.map(item => item.json)\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        912
+      ],
+      "id": "2d9987a2-922e-4253-b7f6-8bd77936f10f",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Collects all detection records and returns them as a single clean array\nconst detectedItems = $input.all();\n\nreturn [{\n    json: {\n        detections: detectedItems.map(item => item.json)\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        1056
+      ],
+      "id": "da3a072f-c215-405f-a5d7-e83f4cbb2a23",
+      "name": "Code in JavaScript2"
+    }
+  ],
+  "pinData": {
+    "Webhook Get Employees": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1335246.hstgr.cloud",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "if-none-match": "W/\"dd32-Qc//ADP8iWvuq/AYeYnDVru79x8\"",
+            "origin": "null",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Google Chrome\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv1335246.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "aa8798436083",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://n8n.srv1335246.hstgr.cloud/webhook/get-employees",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Face Detection": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1335246.hstgr.cloud",
+            "user-agent": "python-requests/2.34.2",
+            "content-length": "24298",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv1335246.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "aa8798436083",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": "b3261f1b-7b7d-4c30-b6dd-42ae306ef61c",
+            "person_id": "emp1",
+            "name": "Kurt",
+            "role": "Staff",
+            "camera": "Camera-1 (Main Entry)",
+            "time": "2026/06/09 16:14:55",
+            "face_image": "data:image/jpeg;base64,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",
+            "score": 0.6215,
+            "registered_photo": true,
+            "ai_commentary": "Biometric Check-in verified via Camera-1 (Main Entry) with 62% confidence.",
+            "ai_risk_score": 0.3785,
+            "createdAt": "2026/06/09 16:14:55",
+            "updatedAt": "2026/06/09 16:14:55"
+          },
+          "webhookUrl": "https://n8n.srv1335246.hstgr.cloud/webhook/1rotary-attendance",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "1Rotary AiraFace IN": {
+      "main": [
+        [
+          {
+            "node": "Respond to AiraFace IN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to AiraFace IN": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1Rotary Attendance OUT": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Attendance OUT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Role": {
+      "main": [
+        [
+          {
+            "node": "If row exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Get Employees": {
+      "main": [
+        [
+          {
+            "node": "Get 1Rotary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get 1Rotary": {
+      "main": [
+        [
+          {
+            "node": "Get Employee_Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Employee_Events": {
+      "main": [
+        [
+          {
+            "node": "Merge Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Data": {
+      "main": [
+        [
+          {
+            "node": "Respond GET",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If row exists": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Download Low-Res Clip from Nx3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze video": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Low-Res Clip from Nx3": {
+      "main": [
+        [
+          {
+            "node": "Analyze video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registration (Upload Photos)": {
+      "main": [
+        [
+          {
+            "node": "Upsert row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Face Detection": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Employee_Events2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Employee_Events2": {
+      "main": [
+        [
+          {
+            "node": "Get 1Rotary2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get 1Rotary2": {
+      "main": [
+        [
+          {
+            "node": "Format Admin Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Admin Report": {
+      "main": [
+        [
+          {
+            "node": "Send Admin Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Save Schedule": {
+      "main": [
+        [
+          {
+            "node": "Split Schedules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Schedules": {
+      "main": [
+        [
+          {
+            "node": "Upsert Employee_Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert Employee_Events": {
+      "main": [
+        [
+          {
+            "node": "Respond POST",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        []
+      ]
+    },
+    "Get Employee_Events3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get 1Rotary3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Admin Report1": {
+      "main": [
+        [
+          {
+            "node": "Send Admin Gmail1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)1": {
+      "main": [
+        [
+          {
+            "node": "Extract Role",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Employee_Events3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get 1Rotary3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Format Admin Report1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Format Admin Report1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveDataSuccessExecution": "all"
+  },
+  "versionId": "8692ecd0-e079-43ad-85bb-593ee770a25e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c9c68c42bada25c5c9d720fa64f0a93ed0451824065fa74f2a9f9524709668e0"
+  },
+  "id": "JIlPEiXI1PEaY2KdLHLRQ",
+  "tags": []
+}
