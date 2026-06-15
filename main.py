@@ -9,6 +9,7 @@ import base64
 import uuid
 import sqlite3
 import time
+import math
 from datetime import datetime
 
 # --- 1. CONFIGURATION ---
@@ -178,11 +179,28 @@ load_profiles()
 if not known_face_encodings:
     print("❌ No valid employee profiles loaded. (Will keep waiting for new uploads)")
 
+    # --- CONFIDENCE CALCULATOR ---
+def face_distance_to_conf(face_distance, face_match_threshold=0.6):
+    if face_distance > face_match_threshold:
+        range_val = (1.0 - face_match_threshold)
+        linear_val = (1.0 - face_distance) / (range_val * 2.0)
+        return float(max(0.0, linear_val))
+    else:
+        range_val = face_match_threshold
+        linear_val = 1.0 - (face_distance / (range_val * 2.0))
+        curve_val = linear_val + ((1.0 - linear_val) * math.pow((linear_val - 0.5) * 2, 0.2))
+        return float(min(1.0, curve_val))
+
 # --- 6. Global Variables for Multiple AI Threads ---
 current_face_ui = {cam_name: [] for cam_name in CAMERAS.keys()}  
 ai_stopped = False
 
 # --- 7. Thread for AI Processing (The Brain) ---
+# --- NEW CONFIGURATION VARIABLES (You can move these to the top of your file) ---
+STRICT_MATCH_THRESHOLD = 0.60  # Default was 0.60. 0.45 is highly accurate.
+MIN_FACE_SIZE = 50             # Minimum pixel height/width to process a face.
+# --------------------------------------------------------------------------------
+
 def ai_worker(cam_name, video_capture):
     global current_face_ui, ai_stopped
     frame_count = 0  
@@ -205,48 +223,53 @@ def ai_worker(cam_name, video_capture):
 
         new_face_ui = []
         for face_location, face_encoding in zip(locations, encodings):
+            top, right, bottom, left = face_location
             
+            # 1. FILTER: Ignore tiny bounding boxes (false positives from background)
+            if (bottom - top) < MIN_FACE_SIZE or (right - left) < MIN_FACE_SIZE:
+                continue
+
             if not known_face_encodings:
                 continue
                 
-            matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+            face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
             display_name = "Unknown"
             
-            face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
             if len(face_distances) > 0:
                 best_match_index = np.argmin(face_distances)
+                raw_distance = float(face_distances[best_match_index])
                 
-                if matches[best_match_index]:
-                    raw_distance = float(face_distances[best_match_index])
-                    confidence_score = 1.0 - raw_distance if raw_distance <= 1.0 else 0.0
+                # 2. FILTER: Enforce Strict Distance Threshold
+                if raw_distance <= STRICT_MATCH_THRESHOLD:
+                    confidence_score = face_distance_to_conf(raw_distance, STRICT_MATCH_THRESHOLD)
                     
-                    person_data = known_face_data[best_match_index].copy()
-                    person_data["score"] = confidence_score  
-                    
-                    display_name = f"{person_data['name']} ({int(confidence_score * 100)}%)"
-                    person_id = person_data["person_id"]
-                    
-                    # --- FIXED: Use seconds instead of days for the cooldown ---
-                    current_time_sec = time.time()
-                    last_seen_time = recent_detections.get(person_id, 0)
-                    
-                    if (current_time_sec - last_seen_time) > COOLDOWN_SECONDS:
-                        recent_detections[person_id] = current_time_sec
+                    # 3. FILTER: Strict 90% Accuracy Requirement
+                    if confidence_score >= 0.90:
+                        person_data = known_face_data[best_match_index].copy()
+                        person_data["score"] = confidence_score  
                         
-                        top, right, bottom, left = face_location
-                        t, r, b, l = top*2, right*2, bottom*2, left*2
+                        display_name = f"{person_data['name']} ({int(confidence_score * 100)}%)"
+                        person_id = person_data["person_id"]
                         
-                        h, w, _ = frame.shape
-                        crop = frame[max(0, t-20):min(h, b+20), max(0, l-20):min(w, r+20)]
+                        current_time_sec = time.time()
+                        last_seen_time = recent_detections.get(person_id, 0)
                         
-                        threading.Thread(target=send_to_n8n, args=(person_data, crop, cam_name), daemon=True).start()
+                        if (current_time_sec - last_seen_time) > COOLDOWN_SECONDS:
+                            recent_detections[person_id] = current_time_sec
+                            
+                            t, r, b, l = top*2, right*2, bottom*2, left*2
+                            h, w, _ = frame.shape
+                            crop = frame[max(0, t-20):min(h, b+20), max(0, l-20):min(w, r+20)]
+                            
+                            threading.Thread(target=send_to_n8n, args=(person_data, crop, cam_name), daemon=True).start()
+                    else:
+                        display_name = "Unknown"
 
-            top, right, bottom, left = face_location
             scaled_location = (top * 2, right * 2, bottom * 2, left * 2)
             new_face_ui.append((scaled_location, display_name))
 
         current_face_ui[cam_name] = new_face_ui
-
+        
 # --- 8. Start Streams and Threads ---
 print("\nConnecting to all cameras... Press 'q' to exit.")
 
