@@ -18,7 +18,10 @@ CAMERAS = {
     "Camera-1 (Main Entry)": "rtsp://admin:%40Dmin1234@192.168.1.53:554/cam/realmonitor?channel=1&subtype=0",
 }
 
-daily_detections = {} 
+# --- NEW: COOLDOWN TIMER ---
+# How many seconds to wait before logging the SAME person again (300 seconds = 5 minutes)
+COOLDOWN_SECONDS = 300 
+recent_detections = {} 
 
 EMPLOYEES_DIR = r'C:\Users\user\Desktop\FaceRecProject\employees'
 DB_PATH = os.path.join(EMPLOYEES_DIR, 'employees.db')
@@ -32,7 +35,7 @@ known_face_data = []
 encoding_cache = {} 
 data_cache = {}
 
-# --- NEW: THE TRAFFIC LIGHT (Prevents the silent crash) ---
+# THE TRAFFIC LIGHT (Prevents the silent crash)
 dlib_lock = threading.Lock()
 
 # --- 2. Thread for CCTV Stream ---
@@ -116,7 +119,6 @@ def load_profiles(quiet=False):
             if img_bgr is None: continue
             img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
             
-            # --- FIX: Turn the traffic light RED while processing the new image ---
             with dlib_lock:
                 encodings = face_recognition.face_encodings(img_rgb)
             
@@ -197,7 +199,6 @@ def ai_worker(cam_name, video_capture):
         small_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
         rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
 
-        # --- FIX: Check the traffic light before analyzing the frame ---
         with dlib_lock:
             locations = face_recognition.face_locations(rgb_small_frame)
             encodings = face_recognition.face_encodings(rgb_small_frame, locations)
@@ -225,11 +226,12 @@ def ai_worker(cam_name, video_capture):
                     display_name = f"{person_data['name']} ({int(confidence_score * 100)}%)"
                     person_id = person_data["person_id"]
                     
-                    current_date = datetime.now().strftime("%Y-%m-%d")
-                    last_seen_date = daily_detections.get(person_id)
+                    # --- FIXED: Use seconds instead of days for the cooldown ---
+                    current_time_sec = time.time()
+                    last_seen_time = recent_detections.get(person_id, 0)
                     
-                    if last_seen_date != current_date:
-                        daily_detections[person_id] = current_date
+                    if (current_time_sec - last_seen_time) > COOLDOWN_SECONDS:
+                        recent_detections[person_id] = current_time_sec
                         
                         top, right, bottom, left = face_location
                         t, r, b, l = top*2, right*2, bottom*2, left*2
